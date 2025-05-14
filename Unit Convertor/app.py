@@ -1,120 +1,116 @@
-print("\n") 
-print("\n") 
+import streamlit as st
 
-print("UNIT CONVERTOR")    
-print("***************")  
-print("\n") 
-
-print("Select from the options below : ")
-print("\n")
-
-print("(1) TEMPERATURE")
-print("(2) LENGTH")
-print("(3) SPEED")
-print("(4) WEIGHT")
-
-print("\n")
-select1 = int(input("Enter your choice : "))
-print("\n")
- 
-
-
-# Temperature Conversion
-if select1 == 1:
-        print("(1) F to C ")
-        print("(2) C to F ")
-        print("\n")
-        select2 = int(input("Enter your choice : "))
-        
-        if select2 == 1:
-            f = float(input("Enter the temperature in Fahrenheit : "))
-            c = (f - 32) * 5/9
-            print(f"The temperature in Celsius is {c} C")
-        elif select2 == 2:
-            c = float(input("Enter the temperature in Celsius : "))
-            f = (c * 9/5) + 32
-            print(f"The temperature in Fahrenheit is {f} F")
-        else:
-            print("Invalid choice!")
-
-
-
- # Length Conversion
-elif select1 == 2:
-    print("(1) M to KM ")
-    print("(2) KM to M ")
-    print("(3) M to CM ")
-    print("(4) CM to M ")
-    print("(5) inch to CM ")
-    print("(6) CM to inch ")
-    select2 = int(input("Enter your choice : "))
+def main():
+    st.title("📏 UNIT CONVERTOR")
+    st.write("***************")
     
-    if select2 == 1:
-        m = float(input("Enter the length in Metres : "))
-        km = m / 1000
-        print(f"The length in Kilometres is {km} km")
-    elif select2 == 2:
-        km = float(input("Enter the length in Kilometres : "))
-        m = km * 1000
-        print(f"The length in Metres is {m} m")
-    elif select2 == 3:
-          m = float(input("Enter the length in Metres : "))
-          cm = m * 100
-          print(f"The length in Centimetres is {cm} cm")
-    elif select2 == 4:
-          cm = float(input("Enter the length in Centimetres : "))
-          m = cm / 100
-          print(f"The length in Metres is {m} m")
-    elif select2 == 5:
-          inch = float(input("Enter the length in Inches : "))
-          cm = inch * 2.54
-          print(f"The length in Centimetres is {cm} cm")
+    st.write("Select from the options below:")
+    option = st.radio(
+        "",
+        ("(1) TEMPERATURE", "(2) LENGTH", "(3) SPEED", "(4) WEIGHT"),
+        index=None
+    )
+    
+    if option == "(1) TEMPERATURE":
+        temp_option = st.radio(
+            "Temperature Conversion:",
+            ("(1) F to C", "(2) C to F"),
+            index=None
+        )
+        
+        if temp_option == "(1) F to C":
+            f = st.number_input("Enter the temperature in Fahrenheit:")
+            if f is not None:
+                c = (f - 32) * 5/9
+                st.success(f"The temperature in Celsius is {c:.2f} °C")
+                
+        elif temp_option == "(2) C to F":
+            c = st.number_input("Enter the temperature in Celsius:")
+            if c is not None:
+                f = (c * 9/5) + 32
+                st.success(f"The temperature in Fahrenheit is {f:.2f} °F")
+    
+    elif option == "(2) LENGTH":
+        length_option = st.radio(
+            "Length Conversion:",
+            ("(1) M to KM", "(2) KM to M", "(3) M to CM", 
+             "(4) CM to M", "(5) inch to CM", "(6) CM to inch"),
+            index=None
+        )
+        
+        if length_option == "(1) M to KM":
+            m = st.number_input("Enter the length in Metres:")
+            if m is not None:
+                km = m / 1000
+                st.success(f"The length in Kilometres is {km:.4f} km")
+                
+        elif length_option == "(2) KM to M":
+            km = st.number_input("Enter the length in Kilometres:")
+            if km is not None:
+                m = km * 1000
+                st.success(f"The length in Metres is {m:.2f} m")
+                
+        elif length_option == "(3) M to CM":
+            m = st.number_input("Enter the length in Metres:")
+            if m is not None:
+                cm = m * 100
+                st.success(f"The length in Centimetres is {cm:.2f} cm")
+                
+        elif length_option == "(4) CM to M":
+            cm = st.number_input("Enter the length in Centimetres:")
+            if cm is not None:
+                m = cm / 100
+                st.success(f"The length in Metres is {m:.2f} m")
+                
+        elif length_option == "(5) inch to CM":
+            inch = st.number_input("Enter the length in Inches:")
+            if inch is not None:
+                cm = inch * 2.54
+                st.success(f"The length in Centimetres is {cm:.2f} cm")
+                
+        elif length_option == "(6) CM to inch":
+            cm = st.number_input("Enter the length in Centimetres:")
+            if cm is not None:
+                inch = cm / 2.54
+                st.success(f"The length in Inches is {inch:.2f} inch")
+    
+    elif option == "(3) SPEED":
+        speed_option = st.radio(
+            "Speed Conversion:",
+            ("(1) KM/H to M/S", "(2) M/S to KM/H"),
+            index=None
+        )
+        
+        if speed_option == "(1) KM/H to M/S":
+            kmh = st.number_input("Enter the speed in KM/H:")
+            if kmh is not None:
+                ms = kmh / 3.6
+                st.success(f"The speed in M/S is {ms:.2f} m/s")
+                
+        elif speed_option == "(2) M/S to KM/H":
+            ms = st.number_input("Enter the speed in M/S:")
+            if ms is not None:
+                kmh = ms * 3.6
+                st.success(f"The speed in KM/H is {kmh:.2f} km/h")
+    
+    elif option == "(4) WEIGHT":
+        weight_option = st.radio(
+            "Weight Conversion:",
+            ("(1) KG to G", "(2) G to KG"),
+            index=None
+        )
+        
+        if weight_option == "(1) KG to G":
+            kg = st.number_input("Enter the weight in Kilograms:")
+            if kg is not None:
+                g = kg * 1000
+                st.success(f"The weight in Grams is {g:.2f} g")
+                
+        elif weight_option == "(2) G to KG":
+            g = st.number_input("Enter the weight in Grams:")
+            if g is not None:
+                kg = g / 1000
+                st.success(f"The weight in Kilograms is {kg:.4f} kg")
 
-    elif select2 == 6:
-          cm = float(input("Enter the length in Centimetres : "))
-          inch = cm / 2.54
-          print(f"The length in Inches is {inch} inch")
-    else:
-            print("Invalid choice!")
-
-
-
-
-
-elif select1 == 3:
-      print("(1) KM/H to M/S ")
-      print("(2) M/S to KM/H ")
-      select2 = int(input("Enter your choice : "))
-
-      if select2 == 1:
-         kmh = float(input("Enter the speed in KM/H : "))
-         ms = kmh / 3.6
-         print(f"The speed in M/S is {ms} m/s")
-
-      elif select2 == 2:
-            ms = float(input("Enter the speed in M/S : "))
-            kmh = ms * 3.6
-            print(f"The speed in KM/H is {kmh} km/h")
-      else:
-            print("Invalid choice!")
-
-
-elif select1 == 4:
-           print("(1) KG to G ")
-           print("(2) G to KG ")
-           select2 = int(input("Enter your choice : "))
-
-           if select2 == 1:
-               kg = float(input("Enter the weight in Kilograms : "))
-               g = kg * 1000
-               print(f"The weight in Grams is {g} g")
-
-           elif select2 == 2:
-                  g = float(input("Enter the weight in Grams : "))
-                  kg = g / 1000
-                  print(f"The weight in Kilograms is {kg} kg")
-           else:
-                  print("Invalid choice!")
-
-else:
-      print("Invalid choice!")
+if __name__ == "__main__":
+    main()
